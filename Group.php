@@ -34,23 +34,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace {
-
-from('Hoa')
 
 /**
  * \Hoa\Acl\Exception
  */
--> import('Acl.Exception')
+use Hoa\Acl\Exception;
 
 /**
  * \Hoa\Graph\IGraph\Node
  */
--> import('Graph.I~.Node');
+use Hoa\Graph\IGraph\Node;
 
-}
 
-namespace Hoa\Acl {
+
 
 /**
  * Class \Hoa\Acl\Group.
@@ -63,7 +59,7 @@ namespace Hoa\Acl {
  * @license    New BSD License
  */
 
-class Group implements \Hoa\Graph\IGraph\Node {
+class Group implements Node {
 
     /**
      * Group ID.
@@ -84,7 +80,7 @@ class Group implements \Hoa\Graph\IGraph\Node {
      *
      * @var \Hoa\Acl\Group array
      */
-    protected $permissions = array();
+    protected $permissions = [];
 
 
 
@@ -112,10 +108,10 @@ class Group implements \Hoa\Graph\IGraph\Node {
      * @return  array
      * @throw   \Hoa\Acl\Exception
      */
-    public function addPermission ( $permissions = array() ) {
+    public function addPermission ( $permissions = [] ) {
 
         if(!is_array($permissions))
-            $permissions = array($permissions);
+            $permissions = [$permissions];
 
         foreach($permissions as $foo => $permission) {
 
@@ -141,7 +137,7 @@ class Group implements \Hoa\Graph\IGraph\Node {
      * @return  array
      * @throw   \Hoa\Acl\Exception
      */
-    public function deletePermission ( $permissions = array() ) {
+    public function deletePermission ( $permissions = [] ) {
 
         if(!is_array($permissions))
             $permissions = array($permissions);
@@ -248,4 +244,4 @@ class Group implements \Hoa\Graph\IGraph\Node {
     }
 }
 
-}
+

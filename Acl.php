@@ -34,43 +34,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace {
+namespace Hoa\Acl;
 
-from('Hoa')
-
-/**
- * \Hoa\Acl\Exception
- */
--> import('Acl.Exception')
-
-/**
- * \Hoa\Acl\User
- */
--> import('Acl.User')
-
-/**
- * \Hoa\Acl\Group
- */
--> import('Acl.Group')
-
-/**
- * \Hoa\Acl\Permission
- */
--> import('Acl.Permission')
-
-/**
- * \Hoa\Acl\Resource
- */
--> import('Acl.Resource')
-
+use Hoa\Core;
 /**
  * \Hoa\Graph
  */
--> import('Graph.~');
+use Hoa\Graph;
 
-}
 
-namespace Hoa\Acl {
+
+
+
 
 /**
  * Class \Hoa\Acl.
@@ -112,7 +87,7 @@ class Acl {
      *
      * @var \Hoa\Acl array
      */
-    protected $users          = array();
+    protected $users          = [];
 
     /**
      * Graph of groups.
@@ -126,7 +101,7 @@ class Acl {
      *
      * @var \Hoa\Acl array
      */
-    protected $resources      = array();
+    protected $resources      = [];
 
 
 
@@ -138,10 +113,10 @@ class Acl {
      *                            class.
      * @return  void
      */
-    private function __construct ( $loop = \Hoa\Graph::DISALLOW_LOOP ) {
+    private function __construct ( $loop =  Graph::DISALLOW_LOOP ) {
 
-        $this->groups = \Hoa\Graph::getInstance(
-            \Hoa\Graph::TYPE_ADJACENCYLIST,
+        $this->groups = Graph::getInstance(
+            Graph::TYPE_ADJACENCYLIST,
             $loop
         );
     }
@@ -154,7 +129,7 @@ class Acl {
      *                            class.
      * @return  object
      */
-    public static function getInstance ( $loop = \Hoa\Graph::DISALLOW_LOOP ) {
+    public static function getInstance ( $loop = Graph::DISALLOW_LOOP ) {
 
         if(null === self::$_instance)
             self::$_instance = new self($loop);
@@ -222,7 +197,7 @@ class Acl {
 
             $this->getGroups()->addNode($group, $inherit);
         }
-        catch ( \Hoa\Graph\Exception $e ) {
+        catch ( Graph\Exception $e ) {
 
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -248,7 +223,7 @@ class Acl {
 
             $this->getGroups()->deleteNode($groupId, $propagate);
         }
-        catch ( \Hoa\Graph\Exception $e ) {
+        catch ( Graph\Exception $e ) {
 
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -563,13 +538,13 @@ class Acl {
     }
 }
 
-}
 
-namespace {
+
+
 
 /**
  * Flex entity.
  */
-Hoa\Core\Consistency::flexEntity('Hoa\Acl\Acl');
 
-}
+Core\Consistency::flexEntity('Hoa\Acl\Acl');
+

@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\Acl {
+namespace Hoa\Acl;
 
 /**
  * Class \Hoa\Acl\User.
@@ -94,7 +94,7 @@ class User {
      * @param   array   $groups    Group to add.
      * @return  array
      */
-    public function addGroup ( $groups = array() ) {
+    public function addGroup ( $groups = [] ) {
 
         if(!is_array($groups))
             $groups = array($groups);
@@ -120,10 +120,10 @@ class User {
      * @param   array   $groups    Group to add.
      * @return  array
      */
-    public function deleteGroup ( $groups = array() ) {
+    public function deleteGroup ( $groups = [] ) {
 
         if(!is_array($groups))
-            $groups = array($groups);
+            $groups = [$groups];
 
         foreach($groups as $foo => $group) {
 
@@ -218,4 +218,4 @@ class User {
     }
 }
 
-}
+
