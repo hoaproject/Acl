@@ -94,10 +94,10 @@ class Resource {
      * @param   array   $users    User to add.
      * @return  array
      */
-    public function addUser ( $users = array() ) {
+    public function addUser ( $users = [] ) {
 
         if(!is_array($users))
-            $users = array($users);
+            $users = [$users];
 
         foreach($users as $foo => $user) {
 
@@ -121,7 +121,7 @@ class Resource {
      * @return  array
      * @throw   \Hoa\Acl\Exception
      */
-    public function deleteUser ( $users = array() ) {
+    public function deleteUser ( $users = [] ) {
 
         $users = (array) $users;
 

@@ -33,20 +33,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+namespace Hoa\Acl;
 
+use Hoa\Acl;
 
-/**
- * \Hoa\Acl\Exception
- */
-use Hoa\Acl\Exception;
-
-/**
- * \Hoa\Graph\IGraph\Node
- */
 use Hoa\Graph\IGraph\Node;
-
-
-
 
 /**
  * Class \Hoa\Acl\Group.
@@ -140,7 +131,7 @@ class Group implements Node {
     public function deletePermission ( $permissions = [] ) {
 
         if(!is_array($permissions))
-            $permissions = array($permissions);
+            $permissions = [$permissions];
 
         foreach($permissions as $foo => $permission) {
 

@@ -67,7 +67,7 @@ class User {
      *
      * @var \Hoa\Acl\User array
      */
-    protected $groups    = array();
+    protected $groups    = [];
 
 
 
@@ -97,7 +97,7 @@ class User {
     public function addGroup ( $groups = [] ) {
 
         if(!is_array($groups))
-            $groups = array($groups);
+            $groups = [$groups];
 
         foreach($groups as $foo => $group) {
 
