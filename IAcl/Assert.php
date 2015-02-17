@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\Acl\IAcl {
+namespace Hoa\Acl\IAcl;
 
 /**
  * Interface \Hoa\Acl\IAcl\Assert.
@@ -59,4 +59,3 @@ interface Assert {
     public function assert ( );
 }
 
-}

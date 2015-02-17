@@ -33,24 +33,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+namespace Hoa\Acl;
 
-namespace {
+use Hoa\Acl;
 
-from('Hoa')
-
-/**
- * \Hoa\Acl\Exception
- */
--> import('Acl.Exception')
-
-/**
- * \Hoa\Graph\IGraph\Node
- */
--> import('Graph.I~.Node');
-
-}
-
-namespace Hoa\Acl {
+use Hoa\Graph\IGraph\Node;
 
 /**
  * Class \Hoa\Acl\Group.
@@ -63,7 +50,7 @@ namespace Hoa\Acl {
  * @license    New BSD License
  */
 
-class Group implements \Hoa\Graph\IGraph\Node {
+class Group implements Node {
 
     /**
      * Group ID.
@@ -84,7 +71,7 @@ class Group implements \Hoa\Graph\IGraph\Node {
      *
      * @var \Hoa\Acl\Group array
      */
-    protected $permissions = array();
+    protected $permissions = [];
 
 
 
@@ -112,10 +99,10 @@ class Group implements \Hoa\Graph\IGraph\Node {
      * @return  array
      * @throw   \Hoa\Acl\Exception
      */
-    public function addPermission ( $permissions = array() ) {
+    public function addPermission ( $permissions = [] ) {
 
         if(!is_array($permissions))
-            $permissions = array($permissions);
+            $permissions = [$permissions];
 
         foreach($permissions as $foo => $permission) {
 
@@ -141,10 +128,10 @@ class Group implements \Hoa\Graph\IGraph\Node {
      * @return  array
      * @throw   \Hoa\Acl\Exception
      */
-    public function deletePermission ( $permissions = array() ) {
+    public function deletePermission ( $permissions = [] ) {
 
         if(!is_array($permissions))
-            $permissions = array($permissions);
+            $permissions = [$permissions];
 
         foreach($permissions as $foo => $permission) {
 
@@ -248,4 +235,4 @@ class Group implements \Hoa\Graph\IGraph\Node {
     }
 }
 
-}
+
