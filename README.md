@@ -29,7 +29,8 @@ actors of an ACL are the following:
   * **Group**, contains zero or more users, has zero or more permissions and
     owns zero or more services. A group can inherit permissions from other
     groups. Users and services cannot be inherited. If a group owns a service,
-    this is a shared service because several users can access to it,
+    this is a shared service because several users can access to it. Some library
+    call also this a role,
   * **User**, can own zero or more services and can belong to zero or more
     groups,
   * **Permission**, is like a right. A group holds zero or more permissions
