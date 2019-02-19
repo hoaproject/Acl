@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -36,16 +38,76 @@
 
 namespace Hoa\Acl;
 
-use Hoa\Exception as HoaException;
-
 /**
- * Class \Hoa\Acl\Exception.
+ * Class \Hoa\Acl\Service.
  *
- * Extending the \Hoa\Exception\Exception class.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * A services is a document, a resource, something a user would like to
+ * access.
  */
-class Exception extends HoaException
+class Service
 {
+    /**
+     * Service ID.
+     *
+     * @var mixed
+     */
+    protected $_id    = null;
+
+    /**
+     * Service label.
+     *
+     * @var ?string
+     */
+    protected $_label = null;
+
+
+
+    /**
+     * Built a new service.
+     */
+    public function __construct($id, ?string $label = null)
+    {
+        $this->setId($id);
+        $this->setLabel($label);
+
+        return;
+    }
+
+    /**
+     * Set service ID.
+     */
+    protected function setId($id)
+    {
+        $old       = $this->_id;
+        $this->_id = $id;
+
+        return $old;
+    }
+
+    /**
+     * Get service ID.
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * Set service label.
+     */
+    public function setLabel(?string $label): ?string
+    {
+        $old          = $this->_label;
+        $this->_label = $label;
+
+        return $old;
+    }
+
+    /**
+     * Get service label.
+     */
+    public function getLabel(): ?string
+    {
+        return $this->_label;
+    }
 }

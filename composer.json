@@ -34,7 +34,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Hoa\\Acl\\": "."
+            "Hoa\\Acl\\"      : "Source",
+            "Hoa\\Acl\\Test\\": "Test"
         }
     },
     "extra": {

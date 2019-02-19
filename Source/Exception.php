@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -36,25 +38,13 @@
 
 namespace Hoa\Acl;
 
+use Hoa\Exception as HoaException;
+
 /**
- * Interface \Hoa\Acl\Assertable.
+ * Class \Hoa\Acl\Exception.
  *
- * Force to implement the assert method.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * Extending the \Hoa\Exception\Exception class.
  */
-interface Assertable
+class Exception extends HoaException
 {
-    /**
-     * Write an assert.
-     * Must return a boolean, because the comparison will be strict (using
-     * ===).
-     *
-     * @param   string  $userId          User ID.
-     * @param   string  $permissionId    Permission ID.
-     * @param   string  $serviceId       Service ID (can be null).
-     * @return  bool
-     */
-    public function assert($userId, $permissionId, $serviceId);
 }

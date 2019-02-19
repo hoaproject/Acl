@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -37,39 +39,33 @@
 namespace Hoa\Acl;
 
 /**
- * Class \Hoa\Acl\Service.
+ * Class \Hoa\Acl\Permission.
  *
- * A services is a document, a resource, something a user would like to
- * access.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * A permission is a right. A group holds zero or more permissions that can be
+ * used to allow or disallow access to something.
  */
-class Service
+class Permission
 {
     /**
-     * Service ID.
+     * Permission ID.
      *
      * @var mixed
      */
     protected $_id    = null;
 
     /**
-     * Service label.
+     * Permission label.
      *
-     * @var string
+     * @var ?string
      */
     protected $_label = null;
 
 
 
     /**
-     * Built a new service.
-     *
-     * @param   mixed   $id       Service ID.
-     * @param   string  $label    Service label.
+     * Built a new permission.
      */
-    public function __construct($id, $label = null)
+    public function __construct($id, ?string $label = null)
     {
         $this->setId($id);
         $this->setLabel($label);
@@ -78,10 +74,7 @@ class Service
     }
 
     /**
-     * Set service ID.
-     *
-     * @param   mixed  $id    Service ID.
-     * @return  mixed
+     * Set permission ID.
      */
     protected function setId($id)
     {
@@ -92,9 +85,7 @@ class Service
     }
 
     /**
-     * Get service ID.
-     *
-     * @return  mixed
+     * Get permission ID.
      */
     public function getId()
     {
@@ -102,12 +93,9 @@ class Service
     }
 
     /**
-     * Set service label.
-     *
-     * @param   string  $label    Service label.
-     * @return  string
+     * Set permission label.
      */
-    public function setLabel($label)
+    public function setLabel(?string $label): ?string
     {
         $old          = $this->_label;
         $this->_label = $label;
@@ -116,11 +104,9 @@ class Service
     }
 
     /**
-     * Get service label.
-     *
-     * @return  mixed
+     * Get permission label.
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->_label;
     }

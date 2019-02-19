@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -45,9 +47,6 @@ use Hoa\Graph;
  * The ACL main class. It contains all users, groups, and services collections.
  * It also proposes to check if a user is allow or not to do an action according
  * to its groups and services.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Acl
 {
@@ -75,7 +74,7 @@ class Acl
     /**
      * Underlying graph.
      *
-     * @var \Hoa\Graph
+     * @var ?Graph
      */
     protected $_groups   = null;
 
@@ -100,20 +99,14 @@ class Acl
 
     /**
      * Add a group, i.e. add a node in the underlying graph.
-     *
-     * @param   \Hoa\Acl\Group  $group      Group to add.
-     * @param   array           $parents    Parent groups (will inherit
-     *                                      permissions).
-     * @return  \Hoa\Acl\Acl
-     * @throws  \Hoa\Acl\Exception
      */
-    public function addGroup(Group $group, array $parents = [])
+    public function addGroup(Group $group, array $parents = []): self
     {
         foreach ($parents as $parent) {
             if (!($parent instanceof Group)) {
                 throw new Exception(
                     'Group %s must be an instance of Hoa\Acl\Group.',
-                    1,
+                    0,
                     $parent
                 );
             }
@@ -130,13 +123,8 @@ class Acl
 
     /**
      * Delete a group, i.e. delete a node in the underlying graph.
-     *
-     * @param   \Hoa\Acl\Group  $group        Group.
-     * @param   bool            $propagate    Propagate the erasure.
-     * @return  \Hoa\Acl\Acl
-     * @throws  \Hoa\Acl\Exception
      */
-    public function deleteGroup(Group $group, $propagate = self::DELETE_RESTRICT)
+    public function deleteGroup(Group $group, bool $propagate = self::DELETE_RESTRICT): self
     {
         try {
             $this->getGroups()->deleteNode($group, $propagate);
@@ -144,7 +132,7 @@ class Acl
             throw new Exception(
                 'Apparently it is not possible to delete the group %s, ' .
                 'probably because it has at least one child.',
-                42,
+                1,
                 $group->getId(),
                 $e
             );
@@ -156,26 +144,19 @@ class Acl
     /**
      * Check if a group exists or not, i.e. if a node in the underlying graph
      * exists.
-     *
-     * @param   mixed  $groupId    Group ID.
-     * @return  bool
      */
-    public function groupExists($groupId)
+    public function groupExists($groupId): bool
     {
         return $this->getGroups()->nodeExists($groupId);
     }
 
     /**
      * Get a specific group, i.e. a specific node in the underlying graph.
-     *
-     * @param   string  $groupId    Group ID.
-     * @return  \Hoa\Acl\Group
-     * @throws  \Hoa\Acl\Exception
      */
-    protected function getGroup($groupId)
+    protected function getGroup(string $groupId): Group
     {
         if (false === $this->groupExists($groupId)) {
-            throw new Exception('Group %s does not exist.', 6, $groupId);
+            throw new Exception('Group %s does not exist.', 2, $groupId);
         }
 
         return $this->getGroups()->getNode($groupId);
@@ -183,23 +164,16 @@ class Acl
 
     /**
      * Get all groups, i.e. get the underlying graph.
-     *
-     * @return  \Hoa\Graph
      */
-    protected function getGroups()
+    protected function getGroups(): Graph
     {
         return $this->_groups;
     }
 
     /**
      * Attach one or more permissions to a group.
-     *
-     * @param   Group  $group          Group.
-     * @param   array  $permissions    Collection of permissions.
-     * @return  \Hoa\Acl\Acl
-     * @throws  \Hoa\Acl\Exception
      */
-    public function allow(Group $group, array $permissions = [])
+    public function allow(Group $group, array $permissions = []): self
     {
         $id = $group->getId();
 
@@ -207,7 +181,7 @@ class Acl
             throw new Exception(
                 'Group %s is not declared in the current ACL instance, ' .
                 'cannot add permissions.',
-                2,
+                3,
                 $id
             );
         }
@@ -219,13 +193,8 @@ class Acl
 
     /**
      * Detach one or more permission to a group.
-     *
-     * @param   Group  $group          Group.
-     * @param   array  $permissions    Collection of permissions.
-     * @return  \Hoa\Acl\Acl
-     * @throws  \Hoa\Acl\Exception
      */
-    public function deny(Group $group, array $permissions = [])
+    public function deny(Group $group, array $permissions = []): self
     {
         $id = $group->getId();
 
@@ -233,7 +202,7 @@ class Acl
             throw new Exception(
                 'Group %s is not declared in the current ACL instance, ' .
                 'cannot delete permissions.',
-                3,
+                4,
                 $id
             );
         }
@@ -245,20 +214,13 @@ class Acl
 
     /**
      * Check if a user is allowed to do something according to the permission.
-     *
-     * @param   mixed               $userId          User ID (or instance).
-     * @param   mixed               $permissionId    Permission ID (or instance).
-     * @param   mixed               $serviceId       Service ID (or instance).
-     * @param   Hoa\Acl\Assertable  $assert          Assert.
-     * @return  bool
-     * @throws  \Hoa\Acl\Exception
      */
     public function isAllowed(
         $userId,
         $permissionId,
         $serviceId         = null,
         Assertable $assert = null
-    ) {
+    ): bool {
         if ($userId instanceof User) {
             $userId = $userId->getId();
         }
@@ -333,10 +295,8 @@ class Acl
 
     /**
      * Transform the groups to DOT language.
-     *
-     * @return  string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getGroups()->__toString();
     }
@@ -345,4 +305,4 @@ class Acl
 /**
  * Flex entity.
  */
-Consistency::flexEntity('Hoa\Acl\Acl');
+Consistency::flexEntity(Acl::class);
