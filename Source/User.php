@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -41,9 +43,6 @@ namespace Hoa\Acl;
  *
  * A user is a role —an actor— that can own zero or more services and can belong
  * to zero or more groups.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class User
 {
@@ -57,7 +56,7 @@ class User
     /**
      * User label.
      *
-     * @var string
+     * @var ?string
      */
     protected $_label    = null;
 
@@ -72,11 +71,8 @@ class User
 
     /**
      * Built a new user.
-     *
-     * @param   mixed   $id       The user ID.
-     * @param   string  $label    The user label.
      */
-    public function __construct($id, $label = null)
+    public function __construct($id, ?string $label = null)
     {
         $this->setId($id);
         $this->setLabel($label);
@@ -86,12 +82,8 @@ class User
 
     /**
      * Add services.
-     *
-     * @param   array  $services    Services to add.
-     * @return  \Hoa\Acl\User
-     * @throws  \Hoa\Acl\Exception
      */
-    public function addServices(array $services = [])
+    public function addServices(array $services = []): self
     {
         foreach ($services as $service) {
             if (!($service instanceof Service)) {
@@ -116,12 +108,8 @@ class User
 
     /**
      * Delete services.
-     *
-     * @param   array  $services    Service to add.
-     * @return  \Hoa\Acl\User
-     * @throws  \Hoa\Acl\Exception
      */
-    public function deleteServices(array $services = [])
+    public function deleteServices(array $services = []): self
     {
         foreach ($services as $service) {
             if (!($service instanceof Service)) {
@@ -146,11 +134,8 @@ class User
 
     /**
      * Check if a service exists or not.
-     *
-     * @param   muxed  $serviceId    Service ID (or instance).
-     * @return  bool
      */
-    public function serviceExists($serviceId)
+    public function serviceExists($serviceId): bool
     {
         if ($serviceId instanceof Service) {
             $serviceId = $serviceId->getId();
@@ -161,12 +146,8 @@ class User
 
     /**
      * Get a specific service.
-     *
-     * @param   string  $serviceId    Service ID.
-     * @return  \Hoa\Acl\Service
-     * @throws  \Hoa\Acl\Exception
      */
-    protected function getService($serviceId)
+    protected function getService(string $serviceId): Service
     {
         if (false === $this->serviceExists($serviceId)) {
             throw new Exception('Service %s does not exist.', 2, $serviceId);
@@ -177,19 +158,14 @@ class User
 
     /**
      * Get all services.
-     *
-     * @return  array
      */
-    protected function getServices()
+    protected function getServices() : array
     {
         return $this->_services;
     }
 
     /**
      * Set user ID.
-     *
-     * @param   mixed  $id    User ID.
-     * @return  mixed
      */
     protected function setId($id)
     {
@@ -201,8 +177,6 @@ class User
 
     /**
      * Get user ID.
-     *
-     * @return  mixed
      */
     public function getId()
     {
@@ -211,11 +185,8 @@ class User
 
     /**
      * Set user label.
-     *
-     * @param   string  $label    User label.
-     * @return  string
      */
-    public function setLabel($label)
+    public function setLabel(?string $label): ?string
     {
         $old          = $this->_label;
         $this->_label = $label;
@@ -225,10 +196,8 @@ class User
 
     /**
      * Get user label.
-     *
-     * @return  mixed
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->_label;
     }

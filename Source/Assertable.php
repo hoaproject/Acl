@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -37,91 +39,16 @@
 namespace Hoa\Acl;
 
 /**
- * Class \Hoa\Acl\Permission.
+ * Interface \Hoa\Acl\Assertable.
  *
- * A permission is a right. A group holds zero or more permissions that can be
- * used to allow or disallow access to something.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
+ * Force to implement the assert method.
  */
-class Permission
+interface Assertable
 {
     /**
-     * Permission ID.
-     *
-     * @var mixed
+     * Write an assert.
+     * Must return a boolean, because the comparison will be strict (using
+     * ===).
      */
-    protected $_id    = null;
-
-    /**
-     * Permission label.
-     *
-     * @var string
-     */
-    protected $_label = null;
-
-
-
-    /**
-     * Built a new permission.
-     *
-     * @param   mixed   $id       Permission ID.
-     * @param   string  $label    Permission label.
-     */
-    public function __construct($id, $label = null)
-    {
-        $this->setId($id);
-        $this->setLabel($label);
-
-        return;
-    }
-
-    /**
-     * Set permission ID.
-     *
-     * @param   mixed  $id    Permission ID.
-     * @return  mixed
-     */
-    protected function setId($id)
-    {
-        $old       = $this->_id;
-        $this->_id = $id;
-
-        return $old;
-    }
-
-    /**
-     * Get permission ID.
-     *
-     * @return  mixed
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    /**
-     * Set permission label.
-     *
-     * @param   string  $label    Permission label.
-     * @return  string
-     */
-    public function setLabel($label)
-    {
-        $old          = $this->_label;
-        $this->_label = $label;
-
-        return $old;
-    }
-
-    /**
-     * Get permission label.
-     *
-     * @return  mixed
-     */
-    public function getLabel()
-    {
-        return $this->_label;
-    }
+    public function assert(string $userId, string $permissionId, string $serviceId): bool;
 }

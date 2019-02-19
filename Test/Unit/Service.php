@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -43,9 +45,6 @@ use Hoa\Test;
  * Class \Hoa\Acl\Test\Unit\Service.
  *
  * Test suite of the service class.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Service extends Test\Unit\Suite
 {
