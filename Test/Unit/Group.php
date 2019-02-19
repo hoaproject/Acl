@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -45,9 +47,6 @@ use Hoa\Test;
  * Class \Hoa\Acl\Test\Unit\Group.
  *
  * Test suite of the group class.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Group extends Test\Unit\Suite
 {

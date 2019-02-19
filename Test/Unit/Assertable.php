@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -43,9 +45,6 @@ use Mock\Hoa\Acl\Assertable as SUT;
  * Class \Hoa\Acl\Test\Unit\Assertable.
  *
  * Test suite of the assertable interface.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Assertable extends Test\Unit\Suite
 {
